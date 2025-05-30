@@ -2,8 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>NgDuc Iu Em 💖</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <title> NgDuc Iu Em 💖</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,7 +11,56 @@
       height: 100%;
       overflow: hidden;
       background: black;
-      perspective: 1000px;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .text {
+      position: absolute;
+      top: 0;
+      font-family: 'Dancing Script', cursive;
+      font-size: 40px;
+      white-space: nowrap;
+      pointer-events: none;
+      animation: gentleFall 14s linear forwards;
+      opacity: 0;
+      color: #fff;
+      text-shadow: 0 0 5px #fff, 0 0 15px #f0f, 0 0 20px #f0f;
+      user-select: none;
+      font-weight: 400;
+    }
+
+    @keyframes gentleFall {
+      0% { transform: translateY(-10vh); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+
+    .heart { font-size: 44px; }
+
+    .petal {
+      position: absolute;
+      width: 10px;
+      height: 16px;
+      background: radial-gradient(ellipse at center, #ff5e7f 60%, #d12c4b 100%);
+      border-radius: 50% 40% 60% 40% / 70% 90% 10% 30%;
+      opacity: 0.8;
+      pointer-events: none;
+      animation: petalFall linear forwards;
+      filter: drop-shadow(0 0 1px #d12c4b);
+    }
+
+    @keyframes petalFall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
     .firefly {
@@ -21,96 +69,7 @@
       height: 2px;
       background: white;
       border-radius: 50%;
-      opacity: 0.6;
-      animation: blink 2s infinite ease-in-out alternate;
-    }
-
-    @keyframes blink {
-      0% { opacity: 0.2; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.5); }
-    }
-
-    .scene {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      z-index: 10;
-    }
-
-    .text {
-      position: absolute;
-      top: 0;
-      font-family: 'Dancing Script', cursive;
-      font-size: 42px;
-      white-space: nowrap;
-      pointer-events: none;
-      animation:
-        gentleFall 14s cubic-bezier(0.42, 0, 0.58, 1) infinite,
-        rgbShift 14s ease-in-out infinite;
-      opacity: 0;
-      color: #fff;
-      text-shadow:
-        0 0 8px #fff,
-        0 0 20px #f0f,
-        0 0 30px #f00,
-        0 0 40px #0ff,
-        0 0 50px #f0f,
-        0 0 60px #f00,
-        0 0 70px #0ff;
-      user-select: none;
-      font-weight: 400;
-      transform-origin: center;
-    }
-
-    @keyframes gentleFall {
-      0% { transform: translateY(-10vh) scale(0.9); opacity: 0; }
-      10% { opacity: 1; }
-      50% { transform: translateY(50vh) scale(1.2); opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(110vh) scale(0.9); opacity: 0; }
-    }
-
-    @keyframes rgbShift {
-      0%, 100% {
-        color: #ffffff;
-        text-shadow: 0 0 8px #ffffff, 0 0 20px #ff83a8, 0 0 30px #d12c4b, 0 0 40px #7feaff;
-      }
-      25% {
-        color: #ff83a8;
-        text-shadow: 0 0 8px #ff83a8, 0 0 20px #ff5e7f, 0 0 30px #d12c4b, 0 0 40px #7feaff;
-      }
-      50% {
-        color: #d12c4b;
-        text-shadow: 0 0 8px #d12c4b, 0 0 20px #ff2a82, 0 0 30px #8b1031, 0 0 40px #7feaff;
-      }
-      75% {
-        color: #7feaff;
-        text-shadow: 0 0 8px #7feaff, 0 0 20px #4ec9ff, 0 0 30px #2185a1, 0 0 40px #7feaff;
-      }
-    }
-
-    .heart {
-      font-size: 48px;
-    }
-
-    .petal {
-      position: absolute;
-      width: 12px;
-      height: 18px;
-      background: radial-gradient(ellipse at center, #ff5e7f 60%, #d12c4b 100%);
-      border-radius: 60% 40% 60% 40% / 70% 90% 10% 30%;
-      opacity: 0.85;
-      pointer-events: none;
-      animation: petalFall linear infinite;
-      filter: drop-shadow(0 0 2px #d12c4b);
-      transform-origin: center;
-    }
-
-    @keyframes petalFall {
-      0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg) translateX(30px); opacity: 0; }
+      opacity: 0.4;
     }
   </style>
 </head>
@@ -142,38 +101,24 @@
 
       const left = Math.random() * 100;
       const duration = 14;
-      const delay = Math.random() * 6;
+      const delay = Math.random() * 4;
 
       el.style.left = left + "vw";
       el.style.top = "0";
-      el.style.animationDuration = `${duration}s, ${duration}s`;
-      el.style.animationDelay = `${delay}s, ${delay}s`;
+      el.style.animationDuration = `${duration}s`;
+      el.style.animationDelay = `${delay}s`;
       scene.appendChild(el);
 
-      setTimeout(() => {
-        scene.removeChild(el);
-      }, (duration + delay) * 1000);
-    }
-
-    setInterval(createText, 300);
-    for (let i = 0; i < 40; i++) createText();
-
-    for (let i = 0; i < 80; i++) {
-      const firefly = document.createElement('div');
-      firefly.className = 'firefly';
-      firefly.style.left = Math.random() * 100 + 'vw';
-      firefly.style.top = Math.random() * 100 + 'vh';
-      firefly.style.animationDuration = (1 + Math.random() * 2) + 's';
-      document.body.appendChild(firefly);
+      setTimeout(() => scene.removeChild(el), (duration + delay) * 1000);
     }
 
     function createPetal() {
-      const petal = document.createElement('div');
-      petal.className = 'petal';
+      const petal = document.createElement("div");
+      petal.className = "petal";
 
       const left = Math.random() * 100;
-      const duration = 10 + Math.random() * 5;
-      const delay = Math.random() * 5;
+      const duration = 8 + Math.random() * 5;
+      const delay = Math.random() * 3;
 
       petal.style.left = left + "vw";
       petal.style.top = "-5vh";
@@ -182,19 +127,50 @@
       petal.style.transform = `rotate(${Math.random() * 360}deg)`;
 
       scene.appendChild(petal);
-
-      setTimeout(() => {
-        scene.removeChild(petal);
-      }, (duration + delay) * 1000);
+      setTimeout(() => scene.removeChild(petal), (duration + delay) * 1000);
     }
 
-    setInterval(createPetal, 500);
-    for (let i = 0; i < 30; i++) createPetal();
+    // Đom đóm bằng canvas-style animation
+    const fireflies = [];
+    const maxFireflies = 30;
+    for (let i = 0; i < maxFireflies; i++) {
+      const f = document.createElement('div');
+      f.className = 'firefly';
+      f.style.left = Math.random() * 100 + 'vw';
+      f.style.top = Math.random() * 100 + 'vh';
+      f.dx = (Math.random() - 0.5) * 0.5;
+      f.dy = (Math.random() - 0.5) * 0.5;
+      scene.appendChild(f);
+      fireflies.push(f);
+    }
 
-    // Tự động phát nhạc nếu có thể
+    function animateFireflies() {
+      fireflies.forEach(f => {
+        const x = parseFloat(f.style.left);
+        const y = parseFloat(f.style.top);
+        let newX = x + f.dx;
+        let newY = y + f.dy;
+        if (newX < 0 || newX > 100) f.dx *= -1;
+        if (newY < 0 || newY > 100) f.dy *= -1;
+        f.style.left = (x + f.dx) + 'vw';
+        f.style.top = (y + f.dy) + 'vh';
+      });
+      requestAnimationFrame(animateFireflies);
+    }
+
+    animateFireflies();
+
+    // Tạo chữ rơi và cánh hoa
+    setInterval(createText, 500);         // ít hơn để nhẹ hơn
+    setInterval(createPetal, 700);        // giãn cách thời gian tạo hoa
+
+    for (let i = 0; i < 20; i++) createText();
+    for (let i = 0; i < 15; i++) createPetal();
+
+    // Tự động phát nhạc (nếu bị chặn thì không lỗi)
     const audio = document.getElementById('background-music');
     audio.play().catch(() => {
-      console.log("Trình duyệt yêu cầu tương tác người dùng để phát nhạc.");
+      console.warn("Trình duyệt chặn tự động phát nhạc cho đến khi người dùng tương tác.");
     });
   </script>
 </body>
