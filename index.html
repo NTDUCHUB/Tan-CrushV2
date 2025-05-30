@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>NgDuc Iu Em 💖</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papmYfwUu3CEzby9eInD3rwT+y9Q5RCqZ8GyHgAF7EfpgV/f4gZkWyhzXUbSLbpNQGcdVKAjz6xMEB5B+6dj7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -191,7 +191,6 @@
     setInterval(createText, 300);
     for (let i = 0; i < 40; i++) createText();
 
-    // Fireflies
     for (let i = 0; i < 80; i++) {
       const firefly = document.createElement('div');
       firefly.className = 'firefly';
@@ -201,7 +200,6 @@
       document.body.appendChild(firefly);
     }
 
-    // Petals
     function createPetal() {
       const petal = document.createElement('div');
       petal.className = 'petal';
@@ -226,12 +224,20 @@
     setInterval(createPetal, 500);
     for (let i = 0; i < 30; i++) createPetal();
 
-    // Audio Control
+    // Audio setup
     const audio = document.getElementById('background-music');
     const audioControl = document.getElementById('audio-control');
     const audioIcon = audioControl.querySelector('i');
+    let isPlaying = true;
 
-    let isPlaying = false;
+    // Tự động phát khi có thể
+    audio.play().then(() => {
+      audioIcon.classList.remove('fa-volume-mute');
+      audioIcon.classList.add('fa-volume-up');
+    }).catch(() => {
+      isPlaying = false;
+      // Nếu trình duyệt chặn, sẽ chờ người dùng click
+    });
 
     function toggleAudio() {
       if (isPlaying) {
