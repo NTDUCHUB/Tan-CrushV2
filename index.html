@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>Soft Floating Text with Vietnamese</title>
+  <title>NgDuc Iu Em 💖</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papmYfwUu3CEzby9eInD3rwT+y9Q5RCqZ8GyHgAF7EfpgV/f4gZkWyhzXUbSLbpNQGcdVKAjz6xMEB5B+6dj7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       width: 100%;
@@ -67,58 +67,29 @@
     }
 
     @keyframes gentleFall {
-      0% {
-        transform: translateY(-10vh) scale(0.9);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(50vh) scale(1.2);
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) scale(0.9);
-        opacity: 0;
-      }
+      0% { transform: translateY(-10vh) scale(0.9); opacity: 0; }
+      10% { opacity: 1; }
+      50% { transform: translateY(50vh) scale(1.2); opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(110vh) scale(0.9); opacity: 0; }
     }
 
     @keyframes rgbShift {
       0%, 100% {
         color: #ffffff;
-        text-shadow:
-          0 0 8px #ffffff,
-          0 0 20px #ff83a8,
-          0 0 30px #d12c4b,
-          0 0 40px #7feaff;
+        text-shadow: 0 0 8px #ffffff, 0 0 20px #ff83a8, 0 0 30px #d12c4b, 0 0 40px #7feaff;
       }
       25% {
         color: #ff83a8;
-        text-shadow:
-          0 0 8px #ff83a8,
-          0 0 20px #ff5e7f,
-          0 0 30px #d12c4b,
-          0 0 40px #7feaff;
+        text-shadow: 0 0 8px #ff83a8, 0 0 20px #ff5e7f, 0 0 30px #d12c4b, 0 0 40px #7feaff;
       }
       50% {
         color: #d12c4b;
-        text-shadow:
-          0 0 8px #d12c4b,
-          0 0 20px #ff2a82,
-          0 0 30px #8b1031,
-          0 0 40px #7feaff;
+        text-shadow: 0 0 8px #d12c4b, 0 0 20px #ff2a82, 0 0 30px #8b1031, 0 0 40px #7feaff;
       }
       75% {
         color: #7feaff;
-        text-shadow:
-          0 0 8px #7feaff,
-          0 0 20px #4ec9ff,
-          0 0 30px #2185a1,
-          0 0 40px #7feaff;
+        text-shadow: 0 0 8px #7feaff, 0 0 20px #4ec9ff, 0 0 30px #2185a1, 0 0 40px #7feaff;
       }
     }
 
@@ -140,95 +111,60 @@
     }
 
     @keyframes petalFall {
-      0% {
-        transform: translateY(-10vh) rotate(0deg) translateX(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg) translateX(30px);
-        opacity: 0;
-      }
+      0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg) translateX(30px); opacity: 0; }
+    }
+
+    #audio-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 30;
+      transition: background 0.3s ease;
+    }
+
+    #audio-control:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    #audio-control i {
+      color: white;
+      font-size: 24px;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
   <div class="scene" id="scene"></div>
 
+  <audio id="background-music" loop playsinline>
+    <source src="https://files.catbox.moe/gb6x32.mp3" type="audio/mpeg" />
+    Trình duyệt của bạn không hỗ trợ âm thanh.
+  </audio>
+
+  <div id="audio-control" aria-label="Toggle background music" role="button" tabindex="0">
+    <i class="fas fa-volume-mute"></i>
+  </div>
+
   <script>
     const texts = [
-      "NgDuc Iu Em", "NgDuc Iu Em", "Mãi bên nhau", "Hạnh phúc", "Vĩnh cửu",
-      "Tình yêu", "Ngọt ngào", "Bên nhau", "❤️", "Anh à", "Mong em", "Thương em",
-      "Mãi mãi", "Chỉ có em", "Trọn đời"
+      "NgDuc Iu Em",
+      "Ah Chỉ Iu Em Thôi Hẹ Hẹ",
+      "I Love You",
+      "❤️",
+      "NTD HUB Iu Em"
     ];
 
     const scene = document.getElementById('scene');
-
-    // Zoom & Rotation
-    let scale = 1;
-    let rotateX = 0;
-    let rotateY = 0;
-
-    function updateTransform() {
-      scene.style.transform = `scale(${scale}) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
-    }
-
-    document.addEventListener('wheel', function (e) {
-      e.preventDefault();
-      scale += e.deltaY * -0.001;
-      scale = Math.min(Math.max(0.5, scale), 2);
-      updateTransform();
-    }, { passive: false });
-
-    let initialDistance = null;
-
-    function getDistance(touches) {
-      const dx = touches[0].clientX - touches[1].clientX;
-      const dy = touches[0].clientY - touches[1].clientY;
-      return Math.sqrt(dx * dx + dy * dy);
-    }
-
-    scene.addEventListener('touchstart', e => {
-      if (e.touches.length === 2) {
-        initialDistance = getDistance(e.touches);
-      }
-    }, { passive: false });
-
-    scene.addEventListener('touchmove', e => {
-      if (e.touches.length === 2 && initialDistance !== null) {
-        e.preventDefault();
-        const currentDistance = getDistance(e.touches);
-        const delta = currentDistance - initialDistance;
-        scale += delta * 0.002;
-        scale = Math.min(Math.max(0.5, scale), 2);
-        updateTransform();
-        initialDistance = currentDistance;
-      }
-    }, { passive: false });
-
-    scene.addEventListener('touchend', e => {
-      if (e.touches.length < 2) {
-        initialDistance = null;
-      }
-    });
-
-    document.addEventListener('mousemove', e => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 2;
-      const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      rotateY = x * 20;
-      rotateX = -y * 15;
-      updateTransform();
-    });
-
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', e => {
-        rotateY = e.gamma * 1.5 || 0;
-        rotateX = e.beta * 1.2 || 0;
-        updateTransform();
-      });
-    }
 
     function createText() {
       const el = document.createElement("div");
@@ -276,103 +212,4 @@
       petal.style.top = "-5vh";
       petal.style.animationDuration = `${duration}s`;
       petal.style.animationDelay = `${delay}s`;
-      petal.style.transform = `rotate(${Math.random() * 360}deg)`;
-
-      scene.appendChild(petal);
-
-      setTimeout(() => {
-        scene.removeChild(petal);
-      }, (duration + delay) * 1000);
-    }
-
-    setInterval(createPetal, 300);
-    for (let i = 0; i < 20; i++) createPetal();
-     /* Audio control button */
-    #audio-control {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 30;
-      transition: background 0.3s ease;
-    }
-    #audio-control:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-    #audio-control i {
-      color: white;
-      font-size: 24px;
-      pointer-events: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="scene" id="scene"></div>
-
-  <audio id="background-music" loop playsinline>
-    <source src="https://files.catbox.moe/gb6x32.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
-
-  <div id="audio-control" aria-label="Toggle background music" role="button" tabindex="0">
-    <i class="fas fa-volume-mute"></i>
-  </div>
-      // Audio control logic
-    const audio = document.getElementById('background-music');
-    const audioControl = document.getElementById('audio-control');
-    let isPlaying = false;
-
-    function updateIcon() {
-      if (isPlaying) {
-        audioControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-      } else {
-        audioControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-      }
-    }
-
-    function toggleAudio() {
-      if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-      } else {
-        audio.play().catch(() => {});
-        isPlaying = true;
-      }
-      updateIcon();
-    }
-
-    audioControl.addEventListener('click', toggleAudio);
-    audioControl.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleAudio();
-      }
-    });
-
-    // Attempt to autoplay muted, then unmute on user interaction
-    audio.muted = true;
-    audio.play().catch(() => {});
-
-    function enableAudio() {
-      if (audio.muted) {
-        audio.muted = false;
-        audio.play().then(() => {
-          isPlaying = true;
-          updateIcon();
-        }).catch(() => {});
-      }
-      window.removeEventListener('click', enableAudio);
-      window.removeEventListener('touchstart', enableAudio);
-    }
-    window.addEventListener('click', enableAudio);
-    window.addEventListener('touchstart', enableAudio);
-  </script>
-</body>
-</html>
+      petal.style.transform
