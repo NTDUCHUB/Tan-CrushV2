@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>NgDuc Iu Em 💖</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papmYfwUu3CEzby9eInD3rwT+y9Q5RCqZ8GyHgAF7EfpgV/f4gZkWyhzXUbSLbpNQGcdVKAjz6xMEB5B+6dj7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -191,6 +191,7 @@
     setInterval(createText, 300);
     for (let i = 0; i < 40; i++) createText();
 
+    // Fireflies
     for (let i = 0; i < 80; i++) {
       const firefly = document.createElement('div');
       firefly.className = 'firefly';
@@ -200,6 +201,7 @@
       document.body.appendChild(firefly);
     }
 
+    // Petals
     function createPetal() {
       const petal = document.createElement('div');
       petal.className = 'petal';
@@ -212,7 +214,42 @@
       petal.style.top = "-5vh";
       petal.style.animationDuration = `${duration}s`;
       petal.style.animationDelay = `${delay}s`;
-      petal.style.transform
-       </script>
+      petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+      scene.appendChild(petal);
+
+      setTimeout(() => {
+        scene.removeChild(petal);
+      }, (duration + delay) * 1000);
+    }
+
+    setInterval(createPetal, 500);
+    for (let i = 0; i < 30; i++) createPetal();
+
+    // Audio Control
+    const audio = document.getElementById('background-music');
+    const audioControl = document.getElementById('audio-control');
+    const audioIcon = audioControl.querySelector('i');
+
+    let isPlaying = false;
+
+    function toggleAudio() {
+      if (isPlaying) {
+        audio.pause();
+        audioIcon.classList.remove('fa-volume-up');
+        audioIcon.classList.add('fa-volume-mute');
+      } else {
+        audio.play();
+        audioIcon.classList.remove('fa-volume-mute');
+        audioIcon.classList.add('fa-volume-up');
+      }
+      isPlaying = !isPlaying;
+    }
+
+    audioControl.addEventListener('click', toggleAudio);
+    audioControl.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') toggleAudio();
+    });
+  </script>
 </body>
 </html>
